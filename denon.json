@@ -1,0 +1,12 @@
+{
+  "$schema": "https://deno.land/x/denon/schema.json",
+  "scripts": {
+    "start": {
+      "cmd": "deno run dummy_response_server.ts",
+      "desc": "run my app.ts file",
+      "allow": ["net"],
+      "unstable": true,
+      "importmap": "import_map.json"
+    }
+  }
+}
