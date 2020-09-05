@@ -1,32 +1,19 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
-import { renderFileToString } from "https://deno.land/x/dejs/mod.ts";
 
-let courseGoals: { name: string; id: string }[] = [];
+import {
+  getAllGoals,
+  getSingleGoal,
+  createGoal,
+  updateGoal,
+  deleteGoal,
+} from "../controllers/goals_controller.ts";
 
 const router = new Router();
 
-router.get("/", async (ctx) => {
-  const body = await renderFileToString(
-    Deno.cwd() + "/views/course_goals.ejs",
-    {
-      title: "My Goals",
-      goals: courseGoals,
-    },
-  );
-
-  ctx.response.body = body;
-});
-
-router.post("/add-goal", async (ctx) => {
-  const body = await ctx.request.body();
-  const newGoalTitle = (await body.value).get("new-goal");
-  if (newGoalTitle.trim().length === 0) {
-    return ctx.response.redirect("/");
-  }
-  const newGoal = { id: new Date().toISOString(), name: newGoalTitle };
-  courseGoals.push(newGoal);
-  console.log(newGoal);
-  ctx.response.redirect("/");
-});
+router.get("/", getAllGoals);
+router.get("/:goalId", getSingleGoal);
+router.post("/add-goal", createGoal);
+router.post("/update-goal", updateGoal);
+router.post("/:goalId", deleteGoal);
 
 export default router;

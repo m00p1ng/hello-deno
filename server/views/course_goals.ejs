@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="/static/app.css">
   <title>Course Goals</title>
 </head>
 
@@ -18,7 +18,9 @@
   </div>
   <ul>
     <% for (let i = 0; i < goals.length; i++) { %>
-    <li><%= goals[i].name %></li>
+    <li>
+      <a href="<%= goals[i].id %>"><%= goals[i].name %></a>
+    </li>
     <% } %>
   </ul>
 </body>
